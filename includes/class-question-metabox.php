@@ -1,15 +1,12 @@
 <?php
 class optionsMetabox {
-    private $screen = array(
-        'questions',
-    );
     public function __construct() {
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
         add_action( 'save_post', array( $this, 'save_fields' ) );
 		add_action('admin_enqueue_scripts',array($this,'enqueue_script_callback'));
     }
 	public function enqueue_script_callback(){
-		wp_enqueue_script( 'main_js', plugin_dir_url( __FILE__ ).'/asset/js/main.js' );
+		wp_enqueue_script( 'main_js', plugin_dir_url( __FILE__ ).'/asset/js/main.js',array('jquery'),time(), true );
 	}
     public function add_meta_boxes() {
             add_meta_box(
@@ -39,7 +36,6 @@ class optionsMetabox {
     }
     public function quiz_field_generator($post){
         $get_select_field = get_post_meta( $post->ID,'select_question',true );
-       echo $get_select_field;
         $args = array(
             'post_type' => 'questions',
             'posts_per_page' => -1,
@@ -116,7 +112,7 @@ class optionsMetabox {
             return $post_id;
         if ( isset( $_POST['options' ] ) ) {
             update_post_meta( $post_id, 'question_options', $_POST['options'] );
-        }elseif(isset($_POST['select_question'])){
+        }elseif(isset($_POST['select_question'])){     // save quiz post type matabox data 
             update_post_meta($post_id,'select_question',$_POST['select_question']);
         }
     }
