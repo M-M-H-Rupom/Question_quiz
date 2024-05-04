@@ -50,7 +50,7 @@ class optionsMetabox {
                 $selected = 'selected';
             }
             ?>
-            <option <?php echo $selected ?> value="<?php echo get_the_title() ?>"> <?php echo get_the_title() ?> </option>
+            <option <?php echo $selected ?> value="<?php echo $get_title ?>"> <?php echo $get_title ?> </option>
             <?php
         }
         wp_reset_postdata();
