@@ -28,7 +28,7 @@ class Quizmetabox{
         ?>
         <table class="form-table">
             <tr>
-                <th>Select questions</th>
+                <th>Select questions :</th>
                     <td>
                         <select name="select_question" id="select_question">
                         <?php
@@ -43,7 +43,6 @@ class Quizmetabox{
                         ?>
                         </select>
                     </td>
-                    <td> hi</td>
                 </tr>
         </table>
         <?php

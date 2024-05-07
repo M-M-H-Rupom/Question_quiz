@@ -52,8 +52,6 @@ class optionsMetabox {
                 </label> 
                 <img src="<?php echo plugin_dir_url( __FILE__ ).'/asset/images/close _1.png' ?>" alt="" style="width:20px; height:20px;">
             </div>
-        
-            
             <div class="options_row">
                 <label for="">
                     <span>Option Title</span> 
@@ -62,8 +60,9 @@ class optionsMetabox {
                 </label> 
                 <img src="<?php echo plugin_dir_url( __FILE__ ).'/asset/images/close _1.png' ?>" alt="" style="width:20px; height:20px;">
             </div>
-        
-        </div>   
+            <div class="option_add_button">
+                <button class='option_add_btn'> Add more + </button>
+            </div>
         <pre>
         <?php 
         $options = get_post_meta($post->ID, 'question_options', true );
