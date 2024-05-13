@@ -5,15 +5,15 @@
     </div>
     <div class="qz_time_pause_results">
         <div class="qz_time logo_text">
-            <img src=" " alt="">
+            <img src="<?php echo QZBL_URL . 'assets/images/carbon_time.png' ?>" alt="">
             <span> 40:00 / <span> 40 </span> </span>
         </div>
         <div class="qz_pause logo_text">
-            <img src=" " alt="">
+            <img src="<?php echo QZBL_URL . 'assets/images/carbon_pause-outline.png' ?> " alt="">
             <span> Pause </span>
         </div>
         <div class="qz_results logo_text">
-            <img src=" " alt="">
+            <img src="<?php echo QZBL_URL . 'assets/images/icon-park-outline_list.png' ?> " alt="">
             <span> Results </span>
         </div>
     </div>
@@ -27,33 +27,33 @@
         </div>
         <div class="qz_content_field">
             <div class="qz_field_text">
-                <div class="field_checkbox selected_field">
-                    <span></span>
-                </div>
+                <label class="field_checkbox ">
+                    <input type="checkbox" name="" id="">
+                </label>
                 <div class="field_option_text">
                     <span>Keep the left hand available to apply the handbrake.</span>
                 </div>
             </div>
             <div class="qz_field_text">
-                <div class="field_checkbox selected_field">
-                    <span></span>
-                </div>
+                <label class="field_checkbox ">
+                    <input type="checkbox" name="" id="">
+                </label>
                 <div class="field_option_text">
                     <span>Drive with the left foot covering the brake pedal.</span>
                 </div>
             </div>
             <div class="qz_field_text">
-                <div class="field_checkbox un_selected_field">
-                    <span></span>
-                </div>
+                <label class="field_checkbox ">
+                    <input type="checkbox" name="" id="">
+                </label>
                 <div class="field_option_text">
                     <span>Drive with the left foot covering the clutch pedal.</span>
                 </div>
             </div>
             <div class="qz_field_text">
-                <div class="field_checkbox un_selected_field">
-                    <span></span>
-                </div>
+                <label class="field_checkbox ">
+                    <input type="checkbox" name="" id="">
+                </label>
                 <div class="field_option_text">
                     <span>Keep a safe distance from the vehicle in front.</span>
                 </div>

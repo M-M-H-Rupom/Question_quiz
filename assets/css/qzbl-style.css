@@ -4,32 +4,41 @@
     box-sizing: border-box;
 }
 /* question metabox css */
-.options_row{
+.row{
     padding: 8px;
     margin: 12px 0;
     border: 1px solid #dcdde1;
     display: flex;
     justify-content: space-around;
+    flex-direction: row;
+    gap: 8px;
     align-items: center;
 }
-.options_row label [type='text']{
-    width: 60%;
-    margin-right: 12px;
+.row label input[type='text']{
+    width: 85%;
+    /* margin-right: 12px; */
 }
-.options_row label{
-    flex-grow: 3;
+.question_title{
+    flex-grow: 2;
 }
-.option_add_button{
+.row_add_button{
     text-align: right;
 }
-.option_add_button .option_add_btn{
+.row_add_button .row_add_btn{
     padding: 8px 16px;
     border-radius: 4px;
     background: #54a0ff;
     margin-top: 8px;
     color: white;
-    border: none;
 }
+.row_remove_btn{
+    margin: 0 8px 0 24px;
+}
+.row_remove_btn{
+    width: 20px;
+    height: 20px;
+}
+
 /* quiz metabox css */
 table select#select_question{
     width: 60%;
@@ -324,6 +333,12 @@ table tr{
         display: flex;
         align-items: center;
     }
+    .field_checkbox input[type='checkbox']{
+        width: 31px;
+        height: 28px;
+        /* border: 3px solid #7997FF;
+        border-radius: 8px; */
+    }
     .field_option_text{
         border: 3px solid #8C8C8C;
         border-radius: 8px;
@@ -346,7 +361,7 @@ table tr{
         border: 3px solid #8C8C8C;
     }
     
-    .selected_field{
+    /* .selected_field{
         width: 35px;
         height: 31px;
         border: 3px solid #7997FF;
@@ -357,7 +372,7 @@ table tr{
         height: 31px;
         border: 3px solid #8C8C8C;
         border-radius: 8px;
-    }
+    } */
 }
 @media (min-width : 1024px){
     .qz_quiz_title_logo{
