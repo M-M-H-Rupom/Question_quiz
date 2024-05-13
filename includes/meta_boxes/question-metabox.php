@@ -5,7 +5,7 @@ class optionsMetabox {
         add_action( 'save_post', array( $this, 'save_fields' ) );
 		add_action('admin_enqueue_scripts',array($this,'enqueue_script_callback'));
     }
-	public function enqueue_script_callback(){
+	public function enqueue_script_callback(){ 
 		wp_enqueue_script( 'main_js', plugin_dir_url( __FILE__ ).'/asset/js/main.js',array('jquery'),time(), true );
 	}
     public function add_meta_boxes() {
@@ -25,47 +25,30 @@ class optionsMetabox {
     }
     
     public function field_generator( $post ) {
-		?>
-        <div class="options_container">
-            <div class="options_row">
-                <label for="">
-                    <span>Option Title</span> 
-                    <input type="text" name="options[0]['title']" id="options"> 
-                    <input type="radio" name="options[0]['correct']"  id="options"> Correct Answer 
-                </label> 
-                <img src="<?php echo plugin_dir_url( __FILE__ ).'/asset/images/close _1.png' ?>" alt="" style="width:20px; height:20px;">
+        $rows = get_post_meta( $post->ID, 'options', true);
+        echo '<pre>';
+        print_r($rows);
+        echo '</pre>';
+        $row_count = get_post_meta( $post->ID, 'row_count', true);
+        foreach( $rows as $row_key => $row_value ){
+            ?>
+            <div class="row-container" data-row-count="<?php echo $row_count; ?>">
+                <div class="row">
+                    <label for="options">
+                        <span>Question title</span> 
+                        <input type="text" name="options[<?php echo $row_key; ?>][title]" id="options" value="<?php echo $row_value['title']; ?>"> 
+                    </label>
+                    <label for="option_<?php echo $row_key; ?>_correct">
+                        <input type="radio" name="options[<?php echo $row_key; ?>][correct]" value="yes" <?php checked($row_value['correct'], 'yes'); ?> id="option_<?php echo $row_key; ?>_correct"> 
+                        <span>Correct Answer</span> 
+                    </label>
+                    <button type='button' class='row_remove_btn'> Remove </button>
+                </div>
+            <?php } ?>
+            <input type="hidden" name="row_count" id="row_count" >
             </div>
-            <div class="options_row">
-                <label for="">
-                    <span>Option Title</span> 
-                    <input type="text" name="options[1]['title']" id="options"> 
-                    <input type="radio" name="options[1]['correct']"  id="options"> Correct Answer 
-                </label> 
-                <img src="<?php echo plugin_dir_url( __FILE__ ).'/asset/images/close _1.png' ?>" alt="" style="width:20px; height:20px;">
-            </div>
-        
-            <div class="options_row">
-                <label for="">
-                    <span>Option Title</span> 
-                    <input type="text" name="options[2]['title']" id="options"> 
-                    <input type="radio" name="options[2]['correct']"  id="options"> Correct Answer 
-                </label> 
-                <img src="<?php echo plugin_dir_url( __FILE__ ).'/asset/images/close _1.png' ?>" alt="" style="width:20px; height:20px;">
-            </div>
-            <div class="options_row">
-                <label for="">
-                    <span>Option Title</span> 
-                    <input type="text" name="options[3]['title']" id="options"> 
-                    <input type="radio" name="options[3]['correct']"  id="options"> Correct Answer 
-                </label> 
-                <img src="<?php echo plugin_dir_url( __FILE__ ).'/asset/images/close _1.png' ?>" alt="" style="width:20px; height:20px;">
-            </div>
-            <div class="option_add_button">
-                <button class='option_add_btn'> Add more + </button>
-            </div>
-        <pre>
-        <?php 
-        $options = get_post_meta($post->ID, 'question_options', true );
+            <button type='button' class='row_add_btn'> Add more + </button>
+            <?php 
     }
 
     public function save_fields( $post_id ) {
@@ -74,7 +57,10 @@ class optionsMetabox {
             return $post_id;
         }
         if ( isset( $_POST['options' ] ) ) {
-            update_post_meta( $post_id, 'question_options', $_POST['options'] );
+            update_post_meta( $post_id, 'options', $_POST['options'] );
+        }
+        if ( isset($_POST['row_count']) ) {
+            update_post_meta($post_id, 'row_count', $_POST['row_count']);
         }
     }
 }
