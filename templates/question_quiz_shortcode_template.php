@@ -26,13 +26,14 @@ $get_selected_questions = explode(',',get_post_meta( $quiz_post_id, 'selected_qu
 <div class="qz_content_main">
     <div class="qz_content qtn_active" data-step="1" data-qtn-id="10">
     <?php 
+    $question_number = 1;
     foreach($get_selected_questions as $single_question){
         $question_title = get_the_title($single_question);
         ?>
         <div class="qz_content_childs">
             <div class="qz_content_title">
                 <span> 
-                    <?php echo $question_title ?>
+                   <span> <?php echo $question_number.". " ; $question_number++ ?> </span> <br> <?php echo $question_title ?>
                 </span>
             </div>
             <!-- questions meta data -->
@@ -55,10 +56,10 @@ $get_selected_questions = explode(',',get_post_meta( $quiz_post_id, 'selected_qu
             </div>
         </div>
     <?php } ?>
-        <div class="qz_content_buttons">
-            <button class="qz_btn">Previous </button>
-            <button class="qz_btn">Next </button>
-        </div>
+    </div>
+    <div class="qz_content_buttons">
+        <button class="qz_btn qz_btn_previous">Previous </button>
+        <button class="qz_btn qz_btn_next">Next </button>
     </div>
 </div>
 </div>

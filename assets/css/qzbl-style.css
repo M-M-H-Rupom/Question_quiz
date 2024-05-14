@@ -81,13 +81,15 @@ table tr{
 }
 .qz_content_main{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 42px;
 }
 .qz_content{
     width: 70%;
     margin-top: 32px;
     color: #585858;
-    min-height: 700px;
+    /* min-height: 700px; */
 }
 .qz_content_title{
     font-size: 18px;
@@ -170,9 +172,9 @@ table tr{
         width: 18px;
         height: 18px;
     }
-    .qz_content{
+    /* .qz_content{
         min-height: 600px;
-    }
+    } */
     .qz_content_title{
         font-size: 14px;
         line-height: 18px;

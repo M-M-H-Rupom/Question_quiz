@@ -28,20 +28,23 @@ class optionsMetabox {
         <div class="row-container" data-row-count="<?php echo $row_count; ?>">
             <input type="hidden" name="row_count" id="row_count" value="<?php echo $row_count; ?>">
             <?php
-            foreach( $rows as $row_key => $row_value ){
-                ?>
-                    <div class="row">
-                        <label for="option_<?php echo $row_key; ?>_title" class="question_title">
-                            <span>Question title</span> 
-                            <input type="text" name="options[<?php echo $row_key; ?>][title]" id="option_<?php echo $row_key; ?>_title" value="<?php echo $row_value['title']; ?>"> 
-                        </label>
-                        <label for="option_<?php echo $row_key; ?>_correct">
-                            <input type="checkbox" name="options[<?php echo $row_key; ?>][correct]" value="yes" <?php checked($row_value['correct'], 'yes'); ?> id="option_<?php echo $row_key; ?>_correct">
-                            <span>Correct Answer</span> 
-                        </label>
-                        <img src="<?php echo QZBL_URL ."assets/images/close_bt.png" ?>" alt="" class='row_remove_btn'>
-                    </div>
-            <?php } ?> <img src="" alt="">
+            if($rows){
+                foreach( $rows as $row_key => $row_value ){
+                    ?>
+                        <div class="row">
+                            <label for="option_<?php echo $row_key; ?>_title" class="question_title">
+                                <span>Question title</span> 
+                                <input type="text" name="options[<?php echo $row_key; ?>][title]" id="option_<?php echo $row_key; ?>_title" value="<?php echo $row_value['title']; ?>"> 
+                            </label>
+                            <label for="option_<?php echo $row_key; ?>_correct">
+                                <input type="checkbox" name="options[<?php echo $row_key; ?>][correct]" value="yes" <?php checked($row_value['correct'], 'yes'); ?> id="option_<?php echo $row_key; ?>_correct">
+                                <span>Correct Answer</span> 
+                            </label>
+                            <img src="<?php echo QZBL_URL ."assets/images/close_bt.png" ?>" alt="" class='row_remove_btn'>
+                        </div>
+                <?php } ?> 
+            <?php } ?>
+            
         </div>
         <div class="row_add_button">
             <button type='button' class='row_add_btn'> Add more + </button>
