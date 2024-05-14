@@ -23,9 +23,6 @@ class optionsMetabox {
     
     public function field_generator( $post ) {
         $rows = get_post_meta( $post->ID, 'options', true);
-        // echo '<pre>';
-        // print_r($rows);
-        // echo '</pre>';
         $row_count = get_post_meta( $post->ID, 'row_count', true);
         ?> 
         <div class="row-container" data-row-count="<?php echo $row_count; ?>">

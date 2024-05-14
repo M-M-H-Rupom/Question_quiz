@@ -20,6 +20,9 @@ class QZBN{
     }
     public function admin_enqueue_callback(){
         wp_enqueue_style( 'qzbl-css', QZBL_URL . 'assets/css/qzbl-style.css' );
+        wp_enqueue_style( 'qzbl-select2-css', QZBL_URL . 'assets/css/select2.css' );
+        wp_enqueue_script( 'jquery' );
+        wp_enqueue_script( 'qzbl-select2-js', QZBL_URL . 'assets/js/select2.js', array('jquery'),time(),true);
         wp_enqueue_script( 'qzbl-js', QZBL_URL . 'assets/js/main.js', array('jquery'),time(),true);
     }
     public function wp_enqueue_callback(){

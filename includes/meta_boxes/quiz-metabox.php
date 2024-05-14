@@ -20,6 +20,8 @@ class Quizmetabox{
     }
     public function quiz_field_generator($post){
         $get_select_field = get_post_meta( $post->ID,'select_question',true );
+        $sel_qtns = get_post_meta( $post->ID,'selected_questions',true );
+        $get_duration = get_post_meta( $post->ID,'quiz_duration',true );
         $args = array(
             'post_type' => 'questions',
             'posts_per_page' => -1,
@@ -30,20 +32,27 @@ class Quizmetabox{
             <tr>
                 <th>Select questions :</th>
                     <td>
-                        <select name="select_question" id="select_question">
+                        <input type="hidden" value="<?php echo $sel_qtns; ?>" name="selected_questions" id="selected_questions">
+                        <select name="select_question" id="select_question" multiple>
                         <?php
                         while($get_all_questions->have_posts()){
                             $get_all_questions->the_post();
                             $get_title = get_the_title();
                             ?>
-                            <option value="<?php echo $get_title ?>"> <?php echo $get_title ?> </option>
+                                <option value="<?php echo get_the_ID(); ?>"> <?php echo $get_title ?> </option>
                             <?php
                         }
                         wp_reset_postdata();
                         ?>
                         </select>
                     </td>
-                </tr>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>
+                    <input type="number" name="quiz_duration" id="quiz_duration" value="<?php echo $get_duration ?>">
+                </td>
+            </tr>
         </table>
         <?php
     }
@@ -54,6 +63,12 @@ class Quizmetabox{
         }
         if(isset($_POST['select_question'])){     // save quiz post type matabox data 
             update_post_meta($post_id,'select_question',$_POST['select_question']);
+        }
+        if(isset($_POST['selected_questions'])){     // save quiz post type matabox data 
+            update_post_meta($post_id,'selected_questions',$_POST['selected_questions']);
+        }
+        if(isset($_POST['quiz_duration'])){     // save quiz post type matabox data 
+            update_post_meta($post_id,'quiz_duration',$_POST['quiz_duration']);
         }
     }
 }

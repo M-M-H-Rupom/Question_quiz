@@ -1,7 +1,12 @@
+<?php
+$quiz_post_id = $custom_atts['id'];
+$get_post = get_post($quiz_id);
+$get_selected_questions = explode(',',get_post_meta( $quiz_post_id, 'selected_questions', true));
+?>
 <div class="qz_container">
 <div class="qz_head">
     <div class="qz_quiz_title_logo">
-        <span> Quiz title </span>
+        <span> <?php echo get_the_title($quiz_post_id)?> </span>
     </div>
     <div class="qz_time_pause_results">
         <div class="qz_time logo_text">
@@ -19,46 +24,37 @@
     </div>
 </div>
 <div class="qz_content_main">
-    <div class="qz_content">
-        <div class="qz_content_title">
-            <span> 
-                1. <br> What should a driver do to avoid having to make an emergency stop?
-            </span>
-        </div>
-        <div class="qz_content_field">
-            <div class="qz_field_text">
-                <label class="field_checkbox ">
-                    <input type="checkbox" name="" id="">
-                </label>
-                <div class="field_option_text">
-                    <span>Keep the left hand available to apply the handbrake.</span>
-                </div>
+    <div class="qz_content qtn_active" data-step="1" data-qtn-id="10">
+    <?php 
+    foreach($get_selected_questions as $single_question){
+        $question_title = get_the_title($single_question);
+        ?>
+        <div class="qz_content_childs">
+            <div class="qz_content_title">
+                <span> 
+                    <?php echo $question_title ?>
+                </span>
             </div>
-            <div class="qz_field_text">
-                <label class="field_checkbox ">
-                    <input type="checkbox" name="" id="">
-                </label>
-                <div class="field_option_text">
-                    <span>Drive with the left foot covering the brake pedal.</span>
-                </div>
-            </div>
-            <div class="qz_field_text">
-                <label class="field_checkbox ">
-                    <input type="checkbox" name="" id="">
-                </label>
-                <div class="field_option_text">
-                    <span>Drive with the left foot covering the clutch pedal.</span>
-                </div>
-            </div>
-            <div class="qz_field_text">
-                <label class="field_checkbox ">
-                    <input type="checkbox" name="" id="">
-                </label>
-                <div class="field_option_text">
-                    <span>Keep a safe distance from the vehicle in front.</span>
-                </div>
+            <!-- questions meta data -->
+            <div class="qz_content_field"> 
+                <?php 
+                $get_question_meta = get_post_meta( $single_question, 'options', true );
+                foreach($get_question_meta as $single_meta){
+                    ?> 
+                    <div class="qz_field_text">
+                        <label class="field_checkbox ">
+                            <input type="checkbox" name="" id="">
+                        </label>
+                        <div class="field_option_text">
+                            <span><?php echo $single_meta['title']; ?> </span>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>       
             </div>
         </div>
+    <?php } ?>
         <div class="qz_content_buttons">
             <button class="qz_btn">Previous </button>
             <button class="qz_btn">Next </button>

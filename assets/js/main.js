@@ -1,7 +1,9 @@
 ;(function($){
+    // remove question option rows
     $(document).on('click','.row_remove_btn',function(){
         $(this).closest('.row').remove();
     });
+    // add more question row
     $(document).on('click','.row_add_btn',function(){
         let close_img = $('.row_remove_btn').attr('src')
         let row_count = $('#row_count').val()
@@ -23,5 +25,23 @@
         $('.row-container').append(row_template)
         $('#row_count').val(row_count)
     })
-    
+    let select_box = $('#select_question').select2({
+        placeholder: "Select a question",
+        allowClear: true
+    })
+    if( $('#selected_questions').length > 0 && $('#selected_questions').val() != "" ) {
+        let selected_qtns = $('#selected_questions').val()
+        $('#select_question').val(selected_qtns.split(',')).trigger('change')
+    }
+    $('#select_question').on('change.select2',function(e){
+        let data = $(this).select2('data')
+        data = data.map(( option ) => {
+            return option.id
+        })
+        // console.log(data)
+        $('#selected_questions').val(data.join(','))
+    })
+
+    // question quiz jQuery
+    // $('.qz_content_main .qz_content_childs').first().hide();
 })(jQuery)
