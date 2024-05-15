@@ -13,12 +13,14 @@ function ajax_quiz_data_callback(){
     $result_id = wp_insert_post( array(
         'post_type' => 'results',
         'post_status' => 'publish',
-        'post_title' => "Something"
+        'post_title' => get_the_title( $quiz_id ). " " . current_time( 'mysql' )
     ) );
     update_post_meta( $result_id, 'result_data', $data );
     update_post_meta( $result_id, 'quiz_id', $quiz_id );
     if( is_user_logged_in() ) {
         update_post_meta( $result_id, 'result_submitted_user_id', get_current_user_id() );
     }
-    wp_send_json_success($result_id);
+    wp_send_json_success(array(
+        'redirect_url' => get_the_permalink( $result_id )
+    ));
 }

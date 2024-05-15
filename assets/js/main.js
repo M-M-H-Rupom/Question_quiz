@@ -57,6 +57,7 @@
                 checked_options_val
             })
         })
+        $.LoadingOverlay('show')
         $.ajax({
             url: localize_ajax.ajaxurl,
             type: "POST",
@@ -68,9 +69,16 @@
                 quiz_id
             },
             success: function (response) {
+                $.LoadingOverlay('hide')
                 console.log(response)
+                if( response.success && response.success == true ) {
+                    if( response.data.redirect_url ) {
+                        window.location.href = response.data.redirect_url
+                    }
+                }
             },
             error: function( err ) {
+                $.LoadingOverlay('hide')
                 // let response = JSON.parse(err.responseText)
                 // console.log(response.data)
                 Swal.fire({
