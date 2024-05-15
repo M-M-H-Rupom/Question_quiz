@@ -1,5 +1,31 @@
 
 ;(function($){
+    String.prototype.toHHMMSS = function () {
+        var sec_num = parseInt(this, 10); // don't forget the second param
+        var hours   = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+        var seconds = sec_num - (hours * 3600) - (minutes * 60);
+    
+        if (hours   < 10) {hours   = "0"+hours;}
+        if (minutes < 10) {minutes = "0"+minutes;}
+        if (seconds < 10) {seconds = "0"+seconds;}
+        return hours+':'+minutes+':'+seconds;
+    }
+    let quiz_timmer = setInterval(function(){
+        let seconds = $('#qz_duration_value').attr('data-time-seconds')
+        let processed_time = String(seconds).toHHMMSS()
+        $('#qz_duration_text').text(processed_time)
+        $('#qz_duration_value').attr('data-time-seconds', parseInt(seconds) - 1)
+        if( parseInt(seconds) <= 0 ) {
+            clearInterval(quiz_timmer)
+            Swal.fire({
+                icon: "warning",
+                text: "Time out. You've to start again."
+            }).then( ok => {
+                window.location.reload()
+            })
+        }
+    },1000)
     var current_child = 0;
     var total = $('.qz_content .qz_content_childs').length;
     $('.qz_content').children().hide();

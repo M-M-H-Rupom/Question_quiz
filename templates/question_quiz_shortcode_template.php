@@ -1,17 +1,18 @@
 <?php
 $quiz_post_id = $custom_atts['id'];
-$get_post = get_post($quiz_id);
+$get_post = get_post($quiz_post_id);
 $get_selected_questions = explode(',',get_post_meta( $quiz_post_id, 'selected_questions', true));
+$get_duration = get_post_meta( $quiz_post_id ,'quiz_duration',true );
 ?>
 <div class="qz_container" data-quiz-id="<?php echo $quiz_post_id; ?>">
 <div class="qz_head">
     <div class="qz_quiz_title_logo">
-        <span> <?php echo get_the_title($quiz_post_id)?> </span>
+        <span><?php echo get_the_title($quiz_post_id)?> </span>
     </div>
     <div class="qz_time_pause_results">
         <div class="qz_time logo_text">
             <img src="<?php echo QZBL_URL . 'assets/images/carbon_time.png' ?>" alt="">
-            <span> 40:00 / <span> 40 </span> </span>
+            <span id="qz_duration_value" data-time-seconds="<?php echo MINUTE_IN_SECONDS * $get_duration; ?>"> <span id="qz_duration_text">00:00:00</span> / <span> <?php echo $get_duration; ?>  <?php echo _n('Minute','Minutes', $get_duration); ?></span> </span>
         </div>
         <!-- <div class="qz_pause logo_text">
             <img src="<?php echo QZBL_URL . 'assets/images/carbon_pause-outline.png' ?> " alt="">
