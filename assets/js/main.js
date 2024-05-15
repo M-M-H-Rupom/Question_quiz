@@ -9,8 +9,15 @@
     // move next question
    
     $(document).on('click','.qz_content_buttons .qz_btn_next',function() {
-        console.log(current_child)
         if ( current_child < ( total - 1 ) ) {
+            let checked_qtn = $('.qz_content .qz_content_childs').eq(current_child).find('input[type="checkbox"]:checked').length
+            if( checked_qtn == 0 ) {
+                Swal.fire({
+                    icon: "warning",
+                    text: "You've to select an answer to go to next question"
+                })
+                return
+            }
             $('.qz_content .qz_content_childs').eq(current_child).fadeOut(function(){
                 // Show the next child
                 current_child++
@@ -29,7 +36,14 @@
         }
     });
     $(document).on('click','.qz_btn[data-finish-quiz]',function(){
-        console.log('finished the quiz')
+        let checked_qtn = $('.qz_content .qz_content_childs').eq(current_child).find('input[type="checkbox"]:checked').length
+        if( checked_qtn == 0 ) {
+            Swal.fire({
+                icon: "warning",
+                text: "You've to select an answer to go to next question"
+            })
+            return
+        }
         $('.qz_progress').animate({
             'width' : '100%'
         },200)
