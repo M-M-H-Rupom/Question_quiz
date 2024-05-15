@@ -1,8 +1,11 @@
 <?php
-// Get the quiz ID
-$quiz_id = sanitize_text_field( $_GET['quiz_id'] );
+$atts = shortcode_atts( array(
+    'result_id' => ''
+), $atts );
 // Get the result ID
-$result_id = sanitize_text_field( $_GET['result_id'] );
+$result_id = $atts['result_id'];
+// Get the quiz ID
+$quiz_id = get_post_meta( $result_id, 'quiz_id', true);
 // Get the quiz title
 $quiz_title = get_the_title( $quiz_id );
 // Get the questions ID string seperated by comma

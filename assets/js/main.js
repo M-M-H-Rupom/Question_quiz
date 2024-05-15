@@ -33,6 +33,7 @@
         }
     });
     $(document).on('click','.qz_btn[data-finish-quiz]',function(){
+        let quiz_id = $('.qz_container').attr('data-quiz-id')
         let checked_qtn = $('.qz_content .qz_content_childs').eq(current_child).find('input[type="checkbox"]:checked').length
         if( checked_qtn == 0 ) {
             Swal.fire({
@@ -59,13 +60,23 @@
         $.ajax({
             url: localize_ajax.ajaxurl,
             type: "POST",
+            dataType: "json",
             // dataType: "dataType",
             data: {
                 'action' : 'quiz_data',
-                'quiz_data' : quiz_data
+                'quiz_data' : quiz_data,
+                quiz_id
             },
             success: function (response) {
                 console.log(response)
+            },
+            error: function( err ) {
+                // let response = JSON.parse(err.responseText)
+                // console.log(response.data)
+                Swal.fire({
+                    icon: "error",
+                    text: err.responseText
+                })
             }
         });
     })

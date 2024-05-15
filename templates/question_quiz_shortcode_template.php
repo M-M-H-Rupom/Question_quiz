@@ -3,7 +3,7 @@ $quiz_post_id = $custom_atts['id'];
 $get_post = get_post($quiz_id);
 $get_selected_questions = explode(',',get_post_meta( $quiz_post_id, 'selected_questions', true));
 ?>
-<div class="qz_container">
+<div class="qz_container" data-quiz-id="<?php echo $quiz_post_id; ?>">
 <div class="qz_head">
     <div class="qz_quiz_title_logo">
         <span> <?php echo get_the_title($quiz_post_id)?> </span>

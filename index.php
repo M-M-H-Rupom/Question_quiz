@@ -17,6 +17,13 @@ class QZBN{
     public function __construct(){
         add_action('admin_enqueue_scripts', array($this,'admin_enqueue_callback'));
         add_action('wp_enqueue_scripts', array($this,'wp_enqueue_callback'));
+        add_filter('the_content', array($this,'qzbl_result_template') );
+    }
+    function qzbl_result_template( $content ){
+        global $post;
+        if( $post->post_type != 'results' ) return;
+        // return 'test_content';
+        return do_shortcode( '[result_ui result_id="'.$post->ID.'"]' );
     }
     public function admin_enqueue_callback(){
         wp_enqueue_style( 'qzbl-css', QZBL_URL . 'assets/css/qzbl-style.css' );
@@ -31,6 +38,7 @@ class QZBN{
         wp_enqueue_script( 'qzbl-js-swal2', QZBL_URL . 'assets/js/swal2.js', array('jquery'),time(),true);
         wp_localize_script( 'qzbl-js-main', 'localize_ajax', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce( 'submit_quiz_nonce' )
         ) );
 
     }
