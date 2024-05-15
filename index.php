@@ -17,6 +17,7 @@ class QZBN{
     public function __construct(){
         add_action('admin_enqueue_scripts', array($this,'admin_enqueue_callback'));
         add_action('wp_enqueue_scripts', array($this,'wp_enqueue_callback'));
+        add_action('admin_menu', array($this,'admin_menu'));
         add_filter('the_content', array($this,'qzbl_result_template') );
     }
     function qzbl_result_template( $content ){
@@ -42,6 +43,58 @@ class QZBN{
             'nonce' => wp_create_nonce( 'submit_quiz_nonce' )
         ) );
 
+    }
+    function admin_menu(){
+        $parent_slug = 'edit.php?post_type=quizs';
+        add_menu_page( 'Quiz builder', 'Quiz builder', 'manage_options', $parent_slug, null, 'dashicons-rest-api' , 2 );
+        add_submenu_page( $parent_slug, 'Quizes', 'Quizes', 'manage_options', 'edit.php?post_type=quizs', null );
+        add_submenu_page( $parent_slug, 'Questions', 'Questions', 'manage_options', 'edit.php?post_type=questions', null );
+        add_submenu_page( $parent_slug, 'Results', 'Results', 'manage_options', 'edit.php?post_type=results', null );
+        add_submenu_page( $parent_slug, 'Settings', 'Settings', 'manage_options', 'quiz_builder_settings', array($this,'quiz_builder_settings_callback') );
+        // add_submenu_page( $parent_slug:string, $page_title:string, $menu_title:string, $capability:string, $menu_slug:string, $callback:callable, $position:integer|float|null )
+    }
+    function quiz_builder_settings_callback(){
+        if( isset($_POST['save_settings'])) {
+            update_option('qzbl_result_page_id', $_POST['result_page_id_val']);
+            echo '<div class="notice notice-success is-dismissible"><p>Settings has been saved.</p></div>';
+        }
+        $result_page_id = get_option('qzbl_result_page_id');
+        ?>
+        <h1>Quiz builder settings</h1>
+        <form method="post">
+            <table class="form-table">
+                <tr>
+                    <th>User result page</th>
+                    <td>
+                        <input type="hidden" value="<?php echo $result_page_id; ?>" id="result_page_id_val" name="result_page_id_val">
+                        <?php
+                        $pages = new WP_Query(array(
+                            'post_type' => 'page',
+                            'post_status' => 'publish',
+                            'posts_per_page' => -1
+                        ));
+                        if( $pages->have_posts() ) {
+                            echo '<select name="result_page_id" id="result_page_id">';
+                                while( $pages->have_posts() ) {
+                                    $pages->the_post();
+                                    printf('<option value="%s">%s</option>',get_the_ID(), get_the_title());
+                                }
+                            echo '</select>';
+                        } else { 
+                            echo 'No page found to be selected.';
+                        }
+                        wp_reset_query();
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <input type="submit" value="Save Settings" name="save_settings" class="button button-primary">
+                    </th>
+                </tr>
+            </table>
+        </form>
+        <?php
     }
 }
 new QZBN();

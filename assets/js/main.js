@@ -159,6 +159,15 @@
         $('.row-container').append(row_template)
         $('#row_count').val(row_count)
     })
+    if( $('#result_page_id').length > 0 ) {
+        $('#result_page_id').select2({
+            'placeholder' : "Select a page"
+        })
+        $(document).on('change.select2','#result_page_id',function(){
+            $('#result_page_id_val').val( $('#result_page_id').select2('data')[0].id )
+        })
+        $('#result_page_id').val( $('#result_page_id_val').val() ).trigger('change')
+    }
     if( $('#select_question').length > 0 ) {
         let select_box = $('#select_question').select2({
             placeholder: "Select a question",

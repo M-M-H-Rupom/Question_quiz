@@ -18,10 +18,16 @@ $get_duration = get_post_meta( $quiz_post_id ,'quiz_duration',true );
             <img src="<?php echo QZBL_URL . 'assets/images/carbon_pause-outline.png' ?> " alt="">
             <span> Pause </span>
         </div> -->
-        <div class="qz_results logo_text">
-            <img src="<?php echo QZBL_URL . 'assets/images/icon-park-outline_list.png' ?> " alt="">
-            <span> Results </span>
-        </div>
+        <?php
+        if( is_user_logged_in() ) {
+        ?>
+        <a href="#">
+            <div class="qz_results logo_text">
+                <img src="<?php echo QZBL_URL . 'assets/images/icon-park-outline_list.png' ?> " alt="">
+                <span> Results </span>
+            </div>
+        </a>
+        <?php } ?>
     </div>
 </div>
 <div class="qz_progress_bar">
