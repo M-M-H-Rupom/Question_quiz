@@ -3,28 +3,31 @@
     var current_child = 0;
     var total = $('.qz_content .qz_content_childs').length;
     $('.qz_content').children().hide();
-    $('.qz_content .qz_content_childs').eq(current_child).show();
+    $('.qz_content').children().eq(current_child).show();
+
     console.log(total);
     // move next question
+   
     $('.qz_content_buttons .qz_btn_next').click(function() {
-        
-        $('.qz_content .qz_content_childs').eq(current_child).hide();
-        current_child++;
-        if (current_child >= total) {
-            current_child = total - 1 ; 
-        }
-        // Show the next child
-        $('.qz_content .qz_content_childs').eq(current_child).show();
+        $('.qz_content .qz_content_childs').eq(current_child).fadeOut(function(){
+            current_child++;
+            if (current_child >= total) {
+                current_child = total - 1 ; 
+            }
+            // Show the next child
+            $('.qz_content .qz_content_childs').eq(current_child).show();
+        });
     });
     // move previous question
     $('.qz_content_buttons .qz_btn_previous').click(function() {
-        $('.qz_content .qz_content_childs').eq(current_child).hide();
-        current_child--;
-        if (current_child < 0) {
-            current_child = 0; 
-        }
-        // Show the previous child
-        $('.qz_content .qz_content_childs').eq(current_child).show();
+        $('.qz_content .qz_content_childs').eq(current_child).fadeOut(function(){
+            current_child--;
+            if (current_child < 0) {
+                current_child = 0; 
+            }
+            // Show the previous child
+            $('.qz_content .qz_content_childs').eq(current_child).show();
+        });
     });
     // remove question option rows
     $(document).on('click','.row_remove_btn',function(){

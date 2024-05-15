@@ -30,7 +30,7 @@ $get_selected_questions = explode(',',get_post_meta( $quiz_post_id, 'selected_qu
     foreach($get_selected_questions as $single_question){
         $question_title = get_the_title($single_question);
         ?>
-        <div class="qz_content_childs">
+        <div class="qz_content_childs" data-step="<?php echo $question_number; ?>" data-qtn-id="<?php echo $single_question; ?>">
             <div class="qz_content_title">
                 <span> 
                    <span> <?php echo $question_number.". " ; $question_number++ ?> </span> <br> <?php echo $question_title ?>
@@ -44,7 +44,7 @@ $get_selected_questions = explode(',',get_post_meta( $quiz_post_id, 'selected_qu
                     ?> 
                     <div class="qz_field_text">
                         <label class="field_checkbox ">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" name="write_question" id="" class='qz_write_question' >
                         </label>
                         <div class="field_option_text">
                             <span><?php echo $single_meta['title']; ?> </span>
