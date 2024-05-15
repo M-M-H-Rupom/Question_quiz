@@ -43,11 +43,11 @@ $get_selected_questions = explode(',',get_post_meta( $quiz_post_id, 'selected_qu
             <div class="qz_content_field"> 
                 <?php 
                 $get_question_meta = get_post_meta( $single_question, 'options', true );
-                foreach($get_question_meta as $single_meta){
+                foreach($get_question_meta as $option_index => $single_meta){
                     ?> 
                     <div class="qz_field_text">
                         <label class="field_checkbox ">
-                            <input type="checkbox" name="write_question" id="" class='qz_write_question' >
+                            <input type="checkbox" name="write_question" value="<?php echo $option_index; ?>" id="" class='qz_write_question' >
                         </label>
                         <div class="field_option_text">
                             <span><?php echo $single_meta['title']; ?> </span>

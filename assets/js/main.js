@@ -47,6 +47,19 @@
         $('.qz_progress').animate({
             'width' : '100%'
         },200)
+        let quiz_data = []
+        $.each($('.qz_content .qz_content_childs'),function(key,question){
+            let qtn_id = $(question).attr('data-qtn-id')
+            let checked_options_val = []
+            $.each($(question).find('input[type="checkbox"]:checked'),(qtn_key, option) => {
+                checked_options_val.push($(option).val())
+            })
+            quiz_data.push({
+                qtn_id,
+                checked_options_val
+            })
+        })
+        console.log(quiz_data)
     })
     // move previous question
     $('.qz_content_buttons .qz_btn_previous').click(function() {
