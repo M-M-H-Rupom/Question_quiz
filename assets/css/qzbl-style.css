@@ -150,6 +150,10 @@ table tr{
     border-radius: 6px;
     border: 2px solid #8C8C8C;
 }
+.qz_btn:disabled{
+    background-color: gray;
+    color:white;
+}
 @media (min-width : 320px){
     .qz_head{
         padding-right:8px ;
@@ -391,4 +395,14 @@ table tr{
     .logo_text{
         gap: 14px;
     }
+}
+.qz_progress_bar{
+    height: 4px;
+    width: 100%;
+    background: rgb(206, 206, 206);
+}
+.qz_progress{
+    background: #0349a0;
+    width:0%;
+    height: 4px;
 }

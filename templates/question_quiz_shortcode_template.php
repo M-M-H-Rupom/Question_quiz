@@ -23,6 +23,9 @@ $get_selected_questions = explode(',',get_post_meta( $quiz_post_id, 'selected_qu
         </div>
     </div>
 </div>
+<div class="qz_progress_bar">
+    <div class="qz_progress"></div>
+</div>
 <div class="qz_content_main">
     <div class="qz_content qtn_active" data-step="1" data-qtn-id="10">
     <?php 
