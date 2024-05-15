@@ -8,4 +8,3 @@ function quiz_ui_callback($atts){
     include QZBL_PATH . '/templates/question_quiz_shortcode_template.php';
     return ob_get_clean();
 }
-?>

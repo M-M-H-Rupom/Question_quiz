@@ -29,6 +29,9 @@ class QZBN{
         wp_enqueue_style( 'qzbl-css', QZBL_URL . 'assets/css/qzbl-style.css' );
         wp_enqueue_script( 'qzbl-js-main', QZBL_URL . 'assets/js/main.js', array('jquery'),time(),true);
         wp_enqueue_script( 'qzbl-js-swal2', QZBL_URL . 'assets/js/swal2.js', array('jquery'),time(),true);
+        wp_localize_script( 'qzbl-js-main', 'localize_ajax', array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+        ) );
 
     }
 }

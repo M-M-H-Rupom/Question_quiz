@@ -13,10 +13,10 @@ $get_selected_questions = explode(',',get_post_meta( $quiz_post_id, 'selected_qu
             <img src="<?php echo QZBL_URL . 'assets/images/carbon_time.png' ?>" alt="">
             <span> 40:00 / <span> 40 </span> </span>
         </div>
-        <div class="qz_pause logo_text">
+        <!-- <div class="qz_pause logo_text">
             <img src="<?php echo QZBL_URL . 'assets/images/carbon_pause-outline.png' ?> " alt="">
             <span> Pause </span>
-        </div>
+        </div> -->
         <div class="qz_results logo_text">
             <img src="<?php echo QZBL_URL . 'assets/images/icon-park-outline_list.png' ?> " alt="">
             <span> Results </span>

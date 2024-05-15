@@ -406,3 +406,61 @@ table tr{
     width:0%;
     height: 4px;
 }
+/* result table style */
+.qzbl_row * {
+    font-family: 'Calibri';
+}
+.qzbl_row p{
+    margin:0;
+    padding:0;
+}
+.qzbl_row{
+    border:1px solid gray;
+    border-radius: 8px;
+}
+.qzbl_row ul{
+    list-style-position: inside;
+}
+.qzbl_answer_container{
+    display: flex;
+    flex-direction: row;
+}
+.qzbl_correct_answers{
+    width:100%;
+    background-color: rgb(206, 255, 228);
+}
+.qzbl_user_answers{
+    width:100%;
+    background-color: rgb(210, 229, 255);
+}
+.qzbl_question_title{
+    font-size: 24px;
+    font-weight: 700;
+}
+.qzbl_user_answers,
+.qzbl_question_title,
+.qzbl_correct_answers,
+.qzbl_question_result{
+    width:100%;
+    padding:8px 16px;
+}
+.qzbl_question_result{
+    font-weight: 600;
+}
+.qzbl_question_result[data-answer="right"]{
+    color:green;
+}
+.qzbl_question_result[data-answer="wrong"]{
+    color:red;
+}
+.qzbl_row{
+    display:flex;
+    flex-direction: column;
+}
+.qzbl_result_content{
+    display:flex;
+    flex-direction: column;
+    gap:16px;
+}
+
+/* result table style ends */

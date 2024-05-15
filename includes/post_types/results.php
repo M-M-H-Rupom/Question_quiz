@@ -1,14 +1,14 @@
 <?php
-function qzbl_register_my_cpts_questions() {
+function qzbl_register_my_cpts_results() {
     $labels = [
-        "name" => esc_html__( "Questions", "qzbl" ),
-        "singular_name" => esc_html__( "Question", "qzbl" ),
-        "add_new_item" => esc_html__( "Add New Question", "qzbl" ),
-        "add_new" => esc_html__( "Add New Question", "qzbl" ),
+        "name" => esc_html__( "Results", "qzbl" ),
+        "singular_name" => esc_html__( "Result", "qzbl" ),
+        "add_new_item" => esc_html__( "Add New Result", "qzbl" ),
+        "add_new" => esc_html__( "Add New Result", "qzbl" ),
     ];
 
     $args = [
-        "label" => esc_html__( "Questions", "qzbl" ),
+        "label" => esc_html__( "Results", "qzbl" ),
         "labels" => $labels,
         "description" => "",
         "public" => true,
@@ -27,12 +27,12 @@ function qzbl_register_my_cpts_questions() {
         "map_meta_cap" => true,
         "hierarchical" => true,
         "can_export" => false,
-        "rewrite" => [ "slug" => "questions", "with_front" => true ],
+        "rewrite" => [ "slug" => "result", "with_front" => true ],
         "query_var" => true,
         "supports" => [ "title", "editor", "thumbnail", "page-attributes" ],
         "show_in_graphql" => false,
     ];
 
-    register_post_type( "questions", $args );
+    register_post_type( "results", $args );
 }
-add_action( 'init','qzbl_register_my_cpts_questions' );
+add_action( 'init', 'qzbl_register_my_cpts_results');

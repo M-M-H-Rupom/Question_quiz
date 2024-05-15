@@ -3,6 +3,8 @@ function qzbl_register_my_cpts_quizs() {
     $labels = [
         "name" => esc_html__( "Quizs", "qzbl" ),
         "singular_name" => esc_html__( "Quiz", "qzbl" ),
+        "add_new_item" => esc_html__( "Add New Quiz", "qzbl" ),
+        "add_new" => esc_html__( "Add New Quiz", "qzbl" ),
     ];
 
     $args = [

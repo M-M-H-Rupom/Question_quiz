@@ -5,9 +5,6 @@
     $('.qz_content').children().hide();
     $('.qz_content').children().eq(current_child).show();
 
-    console.log(total);
-    // move next question
-   
     $(document).on('click','.qz_content_buttons .qz_btn_next',function() {
         if ( current_child < ( total - 1 ) ) {
             let checked_qtn = $('.qz_content .qz_content_childs').eq(current_child).find('input[type="checkbox"]:checked').length
@@ -59,7 +56,18 @@
                 checked_options_val
             })
         })
-        console.log(quiz_data)
+        $.ajax({
+            url: localize_ajax.ajaxurl,
+            type: "POST",
+            // dataType: "dataType",
+            data: {
+                'action' : 'quiz_data',
+                'quiz_data' : quiz_data
+            },
+            success: function (response) {
+                console.log(response)
+            }
+        });
     })
     // move previous question
     $('.qz_content_buttons .qz_btn_previous').click(function() {
