@@ -1,5 +1,11 @@
 
 ;(function($){
+    if( $('#qz_results_anchor').length > 0 ) {
+        $('#qz_results_anchor').css('cursor','pointer')
+        $(document).on('click','#qz_results_anchor',function(){
+            window.location.href = $('#qz_results_anchor').attr('data-href')
+        })
+    }
     String.prototype.toHHMMSS = function () {
         var sec_num = parseInt(this, 10); // don't forget the second param
         var hours   = Math.floor(sec_num / 3600);

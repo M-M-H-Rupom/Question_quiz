@@ -464,3 +464,33 @@ table tr{
 }
 
 /* result table style ends */
+
+/* user result style start */
+.qzbl_user_result_container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    border: 1px solid black;
+    justify-content: center;
+}
+.qzbl_user_results,
+.qzbl_quiz_date_link_title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.result_item{
+    min-width: 33.3333%;
+    border: 1px solid black;
+    text-align: center;
+    padding: 8px 0;
+}
+.qzbl_result_link a{
+    text-decoration: none;
+    color:rgb(231, 2, 2) ;
+}
+.qzbl_quiz_date_link_title{
+    font-size: 22px;
+    color: #4b4545;
+}
+/* user result style end */
