@@ -1,98 +1,64 @@
 <?php
 /**
- * Plugin Name: Questions 
+ * Plugin Name: Questions quiz 
  * Description: hello
  * Version: 1.0
  * Author: Rupom
+ * Text Domain: qzbl
+ * 
  */
+if( !defined('ABSPATH') ) exit;
+define('QZBL_PATH', plugin_dir_path(__FILE__));
+define('QZBL_URL',plugin_dir_url(__FILE__));
+// include files 
+include QZBL_PATH . '/includes/includes.php';
 
-class optionsMetabox {
-    private $screen = array(
-        'questions',
-    );
-    public function __construct() {
-        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-        add_action( 'save_post', array( $this, 'save_fields' ) );
-		add_action('admin_enqueue_scripts',array($this,'enqueue_script_callback'));
+class QZBN{
+    public function __construct(){
+        add_action('admin_enqueue_scripts', array($this,'admin_enqueue_callback'));
+        add_action('wp_enqueue_scripts', array($this,'wp_enqueue_callback'));
+        add_action('admin_menu', array($this,'admin_menu'));
+        add_filter('the_content', array($this,'qzbl_result_template') );
     }
-	public function enqueue_script_callback(){
-		wp_enqueue_script( 'main_js', plugin_dir_url( __FILE__ ).'/asset/js/main.js' );
-	}
-    public function add_meta_boxes() {
-        foreach ( $this->screen as $single_screen ) {
-            add_meta_box(
-                'options',
-                'Options',
-                array( $this, 'meta_box_callback' ),
-                $single_screen,
-                'advanced',
-                'default'
-            );
+    function qzbl_result_template( $content ){
+        global $post;
+        if( $post->post_type != 'results' ) return $content;
+        // return 'test_content';
+        return do_shortcode( '[result_ui result_id="'.$post->ID.'"]' );
+    }
+    public function admin_enqueue_callback(){
+        wp_enqueue_style( 'qzbl-css', QZBL_URL . 'assets/css/qzbl-style.css' );
+        wp_enqueue_style( 'qzbl-select2-css', QZBL_URL . 'assets/css/select2.css' );
+        wp_enqueue_script( 'jquery' );
+        wp_enqueue_script( 'qzbl-select2-js', QZBL_URL . 'assets/js/select2.js', array('jquery'),time(),true);
+        wp_enqueue_script( 'qzbl-js', QZBL_URL . 'assets/js/main.js', array('jquery'),time(),true);
+    }
+    public function wp_enqueue_callback(){
+        wp_enqueue_style( 'qzbl-css', QZBL_URL . 'assets/css/qzbl-style.css' );
+        wp_enqueue_script( 'qzbl-js-main', QZBL_URL . 'assets/js/main.js', array('jquery'),time(),true);
+        wp_enqueue_script( 'qzbl-js-loading', QZBL_URL . 'assets/js/loading.js', array('jquery'),time(),true);
+        wp_enqueue_script( 'qzbl-js-swal2', QZBL_URL . 'assets/js/swal2.js', array('jquery'),time(),true);
+        wp_localize_script( 'qzbl-js-main', 'localize_ajax', array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce( 'submit_quiz_nonce' )
+        ) );
+
+    }
+    function admin_menu(){
+        $parent_slug = 'edit.php?post_type=quizs';
+        add_menu_page( 'Quiz builder', 'Quiz builder', 'manage_options', $parent_slug, null, 'dashicons-rest-api' , 2 );
+        add_submenu_page( $parent_slug, 'Quizes', 'Quizes', 'manage_options', 'edit.php?post_type=quizs', null );
+        add_submenu_page( $parent_slug, 'Questions', 'Questions', 'manage_options', 'edit.php?post_type=questions', null );
+        add_submenu_page( $parent_slug, 'Results', 'Results', 'manage_options', 'edit.php?post_type=results', null );
+        add_submenu_page( $parent_slug, 'Settings', 'Settings', 'manage_options', 'quiz_builder_settings', array($this,'quiz_builder_settings_callback') );
+    }
+    function quiz_builder_settings_callback(){
+        if( isset($_POST['save_settings'])) {
+            update_option('qzbl_result_page_id', $_POST['result_page_id_val']);
+            echo '<div class="notice notice-success is-dismissible"><p>Settings has been saved.</p></div>';
         }
-    }
-
-    public function meta_box_callback( $post ) {
-        wp_nonce_field( 'options_data', 'options_nonce' );
-        $this->field_generator( $post );
-    }
-
-    public function field_generator( $post ) {
-		?>
-        <div class="options_container">
-            <div class="options_row">
-                <label for="">
-                    <span>Option Title</span> 
-                    <input type="text" name="options[0]['title']" id="options"> 
-                    <input type="radio" name="options[0]['correct']"  id="options"> Correct Answer 
-                </label> 
-                <img src="<?php echo plugin_dir_url( __FILE__ ).'/asset/images/close _1.png' ?>" alt="" style="width:20px; height:20px;">
-            </div>
-            <div class="options_row">
-                <label for="">
-                    <span>Option Title</span> 
-                    <input type="text" name="options[1]['title']" id="options"> 
-                    <input type="radio" name="options[1]['correct']"  id="options"> Correct Answer 
-                </label> 
-                <img src="<?php echo plugin_dir_url( __FILE__ ).'/asset/images/close _1.png' ?>" alt="" style="width:20px; height:20px;">
-            </div>
-        
-            <div class="options_row">
-                <label for="">
-                    <span>Option Title</span> 
-                    <input type="text" name="options[2]['title']" id="options"> 
-                    <input type="radio" name="options[2]['correct']"  id="options"> Correct Answer 
-                </label> 
-                <img src="<?php echo plugin_dir_url( __FILE__ ).'/asset/images/close _1.png' ?>" alt="" style="width:20px; height:20px;">
-            </div>
-        
-            
-            <div class="options_row">
-                <label for="">
-                    <span>Option Title</span> 
-                    <input type="text" name="options[3]['title']" id="options"> 
-                    <input type="radio" name="options[3]['correct']"  id="options"> Correct Answer 
-                </label> 
-                <img src="<?php echo plugin_dir_url( __FILE__ ).'/asset/images/close _1.png' ?>" alt="" style="width:20px; height:20px;">
-            </div>
-        
-        </div>   
-        <pre>
-        <?php 
-        $options = get_post_meta($post->ID, 'question_options', true );
-        print_r($options);
-
-        echo '</pre>';
-    }
-
-    public function save_fields( $post_id ) {
-        if ( ! isset( $_POST['options_nonce'] ) )
-            return $post_id;
-        $nonce = $_POST['options_nonce'];
-        if ( !wp_verify_nonce( $nonce, 'options_data' ) )
-            return $post_id;
-        if ( isset( $_POST['options' ] ) ) {
-            update_post_meta( $post_id, 'question_options', $_POST['options'] );
-        }
+        $result_page_id = get_option('qzbl_result_page_id');
+        include QZBL_PATH . 'templates/admin_menu_template.php';
     }
 }
-new optionsMetabox();
+new QZBN();
