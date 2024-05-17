@@ -27,7 +27,7 @@ function qzbl_register_my_cpts_results() {
         "map_meta_cap" => true,
         "hierarchical" => true,
         "can_export" => false,
-        "rewrite" => [ "slug" => "result", "with_front" => true ],
+        "rewrite" => [ "slug" => "results", "with_front" => true ],
         "query_var" => true,
         "supports" => [ "title", "editor", "thumbnail", "page-attributes" ],
         "show_in_graphql" => false,

@@ -141,11 +141,14 @@
     });
     // remove question option rows
     $(document).on('click','.row_remove_btn',function(){
+        if( $('.row_remove_btn').length <= 1 ) return
         $(this).closest('.row').remove();
     });
     // add more question row
-    $(document).on('click','.row_add_btn',function(){
-        let close_img = $('.row_remove_btn').attr('src')
+    $(document).on('click','.row_add_btn',function(e){
+        e.preventDefault()
+        let close_img = $(this).attr('data-remove-img')
+        console.log('close_img',close_img)
         let row_count = $('#row_count').val()
         row_count++
         let row_template = `

@@ -51,6 +51,7 @@ class Quizmetabox{
                 <th>Duration</th>
                 <td>
                     <input type="number" name="quiz_duration" id="quiz_duration" value="<?php echo $get_duration ?>">
+                    <span>Minutes</span>
                 </td>
             </tr>
         </table>

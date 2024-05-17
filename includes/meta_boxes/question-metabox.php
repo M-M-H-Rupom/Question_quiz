@@ -47,8 +47,8 @@ class optionsMetabox {
             
         </div>
         <div class="row_add_button">
-            <button type='button' class='row_add_btn'> Add more + </button>
-        </div>
+            <button type='button' class='row_add_btn' data-remove-img="<?php echo QZBL_URL ."assets/images/close_bt.png" ?>"> Add options + </button>
+        </div> 
         <?php 
     }
 
