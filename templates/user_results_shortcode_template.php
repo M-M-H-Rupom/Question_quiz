@@ -46,5 +46,6 @@ if( $results->have_posts() ) {
         }
     }
 }
+wp_reset_query();
 ?>
 </div>
