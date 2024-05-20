@@ -12,7 +12,7 @@ define('QZBL_PATH', plugin_dir_path(__FILE__));
 define('QZBL_URL',plugin_dir_url(__FILE__));
 // include files 
 include QZBL_PATH . '/includes/includes.php';
-
+include ABSPATH . '/wp-includes/pluggable.php';
 class QZBN{
     public function __construct(){
         add_action('admin_enqueue_scripts', array($this,'admin_enqueue_callback'));
