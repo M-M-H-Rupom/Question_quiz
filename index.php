@@ -12,7 +12,7 @@ define('QZBL_PATH', plugin_dir_path(__FILE__));
 define('QZBL_URL',plugin_dir_url(__FILE__));
 // include files 
 include QZBL_PATH . '/includes/includes.php';
-
+include ABSPATH . '/wp-includes/pluggable.php';
 class QZBN{
     public function __construct(){
         add_action('admin_enqueue_scripts', array($this,'admin_enqueue_callback'));
@@ -23,9 +23,10 @@ class QZBN{
     }
     function qzbl_result_template( $content ){
         global $post;
+        if( is_admin() ) return $content;
         if( $post->post_type != 'results' ) return $content;
         // return 'test_content';
-        return do_shortcode( '[result_ui result_id="'.$post->ID.'"]' );
+        return do_shortcode( '[result_ui]' );
     }
     public function admin_enqueue_callback(){
         wp_enqueue_style( 'qzbl-css', QZBL_URL . 'assets/css/qzbl-style.css' );

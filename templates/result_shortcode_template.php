@@ -1,9 +1,11 @@
 <?php
-$atts = shortcode_atts( array(
-    'result_id' => ''
-), $atts );
-// Get the result ID
-$result_id = $atts['result_id'];
+global $post;
+$result_id = $post->ID;
+// $atts = shortcode_atts( array(
+//     'result_id' => ''
+// ), $atts );
+// // Get the result ID
+// $result_id = $atts['result_id'];
 // Get the quiz ID
 $quiz_id = get_post_meta( $result_id, 'quiz_id', true);
 // Get the quiz title
