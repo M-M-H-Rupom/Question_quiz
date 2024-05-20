@@ -41,8 +41,11 @@ $get_duration = get_post_meta( $quiz_post_id ,'quiz_duration',true );
             <div class="qz_content_childs" data-step="<?php echo $question_number; ?>" data-qtn-id="<?php echo $single_question; ?>">
                 <div class="qz_content_title">
                     <span> 
-                    <span> <?php echo $question_number.". " ; $question_number++ ?> </span> <br> <?php echo $question_title ?>
+                        <span> <?php echo $question_number.". " ; $question_number++ ?> </span> <br> <?php echo $question_title ?>
                     </span>
+                </div>
+                <div class="qz_content_description">
+                    <p><?php echo get_the_content(null, null, $single_question); ?></p>
                 </div>
                 <!-- questions meta data -->
                 <div class="qz_content_field"> 

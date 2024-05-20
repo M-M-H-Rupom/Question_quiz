@@ -31,7 +31,6 @@ function ajax_quiz_data_callback(){
         update_post_meta( $result_id, 'result_submitted_user_id', get_current_user_id() );
     }
     wp_send_json_success(array(
-        $data
-        // 'redirect_url' => get_the_permalink( $result_id )
+        'redirect_url' => get_the_permalink( $result_id )
     )); 
 }
