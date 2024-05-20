@@ -53,10 +53,11 @@ class optionsMetabox {
     }
 
     public function save_fields( $post_id ) {
-        $nonce = $_POST['options_nonce'];
-        if ( ! isset( $_POST['options_nonce'] ) && !wp_verify_nonce( $nonce, 'options_data' ) ){
-            return $post_id;
-        }
+        // $nonce = $_POST['options_nonce'];
+        // if ( ! isset( $_POST['options_nonce'] ) && !wp_verify_nonce( $nonce, 'options_data' ) ){
+        //     return $post_id;
+        // }
+        if( wp_doing_ajax() ) return;
         if ( isset( $_POST['options' ] ) ) {
             update_post_meta( $post_id, 'options', $_POST['options'] );
         }

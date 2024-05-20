@@ -25,16 +25,16 @@ class QZBN{
         global $post;
         if( $post->post_type != 'results' ) return $content;
         // return 'test_content';
-        return do_shortcode( '[result_ui result_id="'.$post->ID.'"]' );
+        return do_shortcode( '[result_ui]' );
     }
     public function admin_enqueue_callback(){
-        wp_enqueue_style( 'qzbl-css', QZBL_URL . 'assets/css/qzbl-style.css' );
+        wp_enqueue_style( 'qzbl-css', QZBL_URL . 'assets/css/qzbl-style.css', array(), time() );
         wp_enqueue_style( 'qzbl-select2-css', QZBL_URL . 'assets/css/select2.css' );
         wp_enqueue_script( 'jquery' );
         wp_enqueue_script( 'qzbl-select2-js', QZBL_URL . 'assets/js/select2.js', array('jquery'),time(),true);
     }
     public function wp_enqueue_callback(){
-        wp_enqueue_style( 'qzbl-css', QZBL_URL . 'assets/css/qzbl-style.css' );
+        wp_enqueue_style( 'qzbl-css', QZBL_URL . 'assets/css/qzbl-style.css', array(), time() );
         wp_enqueue_script( 'qzbl-js-main', QZBL_URL . 'assets/js/main.js', array('jquery'),time(),true);
         wp_enqueue_script( 'qzbl-js-loading', QZBL_URL . 'assets/js/loading.js', array('jquery'),time(),true);
         wp_enqueue_script( 'qzbl-js-swal2', QZBL_URL . 'assets/js/swal2.js', array('jquery'),time(),true);

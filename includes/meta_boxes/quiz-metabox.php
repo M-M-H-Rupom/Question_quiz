@@ -58,10 +58,11 @@ class Quizmetabox{
         <?php
     }
     public function save_quiz_fields( $post_id ) {
-        $nonce = $_POST['quiz_nonce'];
-        if ( ! isset( $_POST['quiz_nonce'] ) && !wp_verify_nonce( $nonce, 'quiz_data' ) ){
-            return $post_id;
-        }
+        // $nonce = $_POST['quiz_nonce'];
+        // if ( ! isset( $_POST['quiz_nonce'] ) && !wp_verify_nonce( $nonce, 'quiz_data' ) ){
+        //     return $post_id;
+        // }
+        if( wp_doing_ajax() ) return;
         if(isset($_POST['select_question'])){     // save quiz post type matabox data 
             update_post_meta($post_id,'select_question',$_POST['select_question']);
         }

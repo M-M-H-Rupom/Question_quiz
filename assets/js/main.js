@@ -98,6 +98,7 @@
             data: {
                 'action' : 'quiz_data',
                 'quiz_data' : quiz_data,
+                nonce: localize_ajax.nonce,
                 quiz_id
             },
             success: function (response) {
@@ -110,6 +111,7 @@
                 }
             },
             error: function( err ) {
+                console.log(err)
                 $.LoadingOverlay('hide')
                 // let response = JSON.parse(err.responseText)
                 // console.log(response.data)
@@ -180,7 +182,8 @@
     if( $('#select_question').length > 0 ) {
         let select_box = $('#select_question').select2({
             placeholder: "Select a question",
-            allowClear: true
+            allowClear: true,
+            width: 150
         })
         if( $('#selected_questions').length > 0 && $('#selected_questions').val() != "" ) {
             let selected_qtns = $('#selected_questions').val()

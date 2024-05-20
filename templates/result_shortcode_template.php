@@ -1,9 +1,11 @@
 <?php
-$atts = shortcode_atts( array(
-    'result_id' => ''
-), $atts );
+// $atts = shortcode_atts( array(
+//     'result_id' => ''
+// ), $atts );
 // Get the result ID
-$result_id = $atts['result_id'];
+// $result_id = $atts['result_id'];
+global $post;
+$result_id = $post->ID;
 // Get the quiz ID
 $quiz_id = get_post_meta( $result_id, 'quiz_id', true);
 // Get the quiz title
@@ -12,6 +14,11 @@ $quiz_title = get_the_title( $quiz_id );
 $quiz_questions = get_post_meta( $quiz_id, 'selected_questions', true );
 // Get the result data
 $result_data = get_post_meta( $result_id, 'result_data', true);
+// echo '<pre>';
+// print_r($result_data);
+// print_r($quiz_questions);
+// echo '</pre>';
+// return;
 // Get correct answer data from the admin's meta data
 $correct_ans_data = [];
 // Get all the titles of the options
@@ -33,6 +40,12 @@ $result_ans_data = [];
 foreach( $result_data as $a_result ) {
     $result_ans_data[$a_result['qtn_id']] = $a_result['checked_options_val'];
 }
+// echo '<pre>';
+// print_r($correct_ans_data);
+// print_r($result_ans_data);
+// print_r($this_question_titles);
+// echo '</pre>';
+// return;
 ?>
 <div class="qzbl_result_container">
     <div class="qzbl_result_content">
