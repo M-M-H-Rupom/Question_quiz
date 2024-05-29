@@ -26,7 +26,7 @@
             clearInterval(quiz_timmer)
             Swal.fire({
                 icon: "warning",
-                text: "Time out. You've to start again."
+                text: localize_ajax.time_out_text
             }).then( ok => {
                 window.location.reload()
             })
@@ -43,7 +43,7 @@
             if( checked_qtn == 0 ) {
                 Swal.fire({
                     icon: "warning",
-                    text: "You've to select an answer to go to next question"
+                    text: localize_ajax.next_question_prevent
                 })
                 return
             }
@@ -70,7 +70,7 @@
         if( checked_qtn == 0 ) {
             Swal.fire({
                 icon: "warning",
-                text: "You've to select an answer to go to next question"
+                text: localize_ajax.next_question_prevent
             })
             return
         }

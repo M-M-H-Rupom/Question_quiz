@@ -42,7 +42,9 @@ class QZBN{
         wp_localize_script( 'qzbl-js-main', 'localize_ajax', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
             'qzbl_url' => QZBL_URL,
-            'nonce' => wp_create_nonce( 'submit_quiz_nonce' )
+            'nonce' => wp_create_nonce( 'submit_quiz_nonce' ),
+            'next_question_prevent' => __("You've to select an answer to go to next question",'qzbl'),
+            'time_out_text' => __("Time out. You've to start again.",'qzbl'),
         ) );
 
     }
